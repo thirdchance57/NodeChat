@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SOCKET LESSON</title>
+</head>
+<body>
+  <h1> ez chat </h1>
+  <div class="chatroom" style="height:200px; width:400px; border: 1px solid black"></div>
+  <input type="text" class="content">
+  <button onclick="sendMessage()"></button>
+
+<!--connect socket.io client-side library -->
+  <script src="/socket.io/socket.io.js"> </script>
+  <script>
+
+    var socket = io();
+
+    var sendMessage = function() {
+      var m = document.getElementsByClassName("content")[0].value;
+      socket.emit('message', m);
+    };
+
+    socket.on('chat', function(m) {
+      console.log(m);
+      document.getElementsByClassName("chatroom")[0].innerHTML = m;
+    });
+  </script>
+</body>
+</html>  
